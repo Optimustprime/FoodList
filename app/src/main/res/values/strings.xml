@@ -2,4 +2,5 @@
     <string name="app_name">FoodList</string>
     <string name="theoptimust_menu">TheOptimust Menu</string>
     <string name="todo">TODO</string>
+    <string name="switch_icon" />
 </resources>

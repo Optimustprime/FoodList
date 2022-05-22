@@ -5,12 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="12dp"
+    android:clickable="false"
+    android:foreground="?android:selectableItemBackground"
     app:cardCornerRadius="20dp"
     app:cardElevation="60dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +26,9 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:contentDescription="TODO" />
+            android:clickable="true"
+            android:contentDescription="TODO"
+            android:tag="myfood" />
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>
