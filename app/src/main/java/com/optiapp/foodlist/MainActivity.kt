@@ -5,13 +5,15 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.optiapp.foodlist.adapter.itemAdapter
 import com.optiapp.foodlist.data.DataSource
-private var isLinearLayoutManager=true
+private var isGridLayoutManager=true
 
 class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -31,16 +33,19 @@ class MainActivity : AppCompatActivity() {
          recyclerView=findViewById<RecyclerView>(R.id.foodlist)
 //        recyclerView.adapter=itemAdapter(this,myDataSource)
         change()
-        recyclerView.setHasFixedSize(true)
+//        recyclerView.setHasFixedSize(true)
 
     }
     private fun change(){
-        if(isLinearLayoutManager){
-            recyclerView.layoutManager=LinearLayoutManager(this)
+        if(isGridLayoutManager){
+            recyclerView.layoutManager=GridLayoutManager(this,2)
 
         }
         else{
-            recyclerView.layoutManager=GridLayoutManager(this,2)
+            recyclerView.layoutManager=StaggeredGridLayoutManager(3, LinearLayoutManager.HORIZONTAL)
+            var toast=Toast.makeText(applicationContext,"StaggaredGrid: Swipe Left",Toast.LENGTH_LONG)
+            toast.show()
+
         }
         recyclerView.adapter=itemAdapter(this,myDataSource)
     }
@@ -49,10 +54,11 @@ class MainActivity : AppCompatActivity() {
             return
         }
         menuItem.icon=
-            if(isLinearLayoutManager)
-                ContextCompat.getDrawable(this,R.drawable.ic_baseline_view_list_24)
+            if(isGridLayoutManager)
+                ContextCompat.getDrawable(this,R.drawable.ic_baseline_view_quilt_24)
+
             else{
-                ContextCompat.getDrawable(this,R.drawable.ic_baseline_menu_24)
+                ContextCompat.getDrawable(this,R.drawable.ic_baseline_view_list_24)
             }
 
     }
@@ -69,7 +75,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.action_switch ->{
-                isLinearLayoutManager= !isLinearLayoutManager
+                isGridLayoutManager= !isGridLayoutManager
                 change()
                 seticon(item)
                 return true
